@@ -1,0 +1,8 @@
+test.c
+a.out
+*.o
+*.a
+*.log
+*.swp
+*.svn
+GKlib
