@@ -48,8 +48,10 @@ static const size_t DLSORT_PRI(nbuckets) = 256;
 #endif
 
 
-#ifdef __GNUC__
+#if defined( __GNUC__ ) && __GNUC__ >= 7
   #define EXPLICIT_FALLTHROUGH __attribute__ ((fallthrough))
+#else
+  #define EXPLICIT_FALLTHROUGH
 #endif
 
 #define __BS_BLOCK(n,x,y,v,b,a) \
