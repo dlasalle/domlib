@@ -34,6 +34,8 @@ static const size_t DLSORT_PRI(nbuckets) = 256;
 ******************************************************************************/
 
 
+
+
 #ifndef DLSORT_VISIBILITY
   #define DLSORT_DEFVIS
   #define DLSORT_VISIBILITY
@@ -46,14 +48,18 @@ static const size_t DLSORT_PRI(nbuckets) = 256;
 #endif
 
 
+#ifdef __GNUC__
+  #define EXPLICIT_FALLTHROUGH __attribute__ ((fallthrough))
+#endif
+
 #define __BS_BLOCK(n,x,y,v,b,a) \
   case (n) : \
     if (DLSORT_COMPARE(v,a[(x)+((signed)b)])) { \
       (y) = (x) + ((signed)b); \
     } else { \
       (x) = (y) - ((signed)b); \
-    }
-
+    } \
+    EXPLICIT_FALLTHROUGH;
 
 DLSORT_VISIBILITY ssize_t DLSORT_PUB(binarysearch)(
     const DLSORT_TYPE_T * const ptr, const DLSORT_TYPE_T v, const size_t n)
@@ -310,6 +316,11 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
   }
   return a;
 } 
+
+
+#ifdef EXPLICIT_FALLTHROUGH
+  #undef EXPLICIT_FALLTHROUGH
+#endif
 
 
 #ifdef DLSORT_DEFAULT_COMPARE
