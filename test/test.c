@@ -220,7 +220,9 @@
 DL_MK_SORTKV_FUNCS(sint,sint_t,sint_t)
 
 
-sint_t main(const int argc, const char ** argv) 
+int main(
+    const int argc,
+    const char ** argv) 
 {
   dl_timer_t tmr;
   dl_init_timer(&tmr);

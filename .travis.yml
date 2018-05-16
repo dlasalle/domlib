@@ -1,7 +1,7 @@
 language: c
 compiler:
-  - clang
   - gcc
 
 script:
-  - make && make test
+  - ./configure --test && make && make test
+  - ./configure --debug --assert --test && make && make test
