@@ -19,6 +19,12 @@
 #include "dlterm.h"
 
 
+#ifndef _WIN32
+#include "sys/ioctl.h"
+#else
+#include "windows.h"
+#endif
+
 
 
 /******************************************************************************
@@ -68,11 +74,19 @@ static const char * const __BAR_FMT = "%03.1lf%%";
 
 size_t dl_get_term_width(void)
 {
+  #ifndef _WIN32
   struct winsize w;
   if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 && 
       ((size_t)w.ws_col) <= __MAX_VALID_TERM_WIDTH &&
       ((size_t)w.ws_col) >= __MIN_VALID_TERM_WIDTH) {
     return (size_t)w.ws_col;
+  #else
+  int ret;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  ret = GetConsoleScreenBufferInfo(GetStdHandle( STD_OUTPUT_HANDLE ),&csbi);
+  if (ret) {
+    return (size_t)csbi.dwSize.X;
+  #endif
   } else {
     return __DEFAULT_TERM_WIDTH;
   }
