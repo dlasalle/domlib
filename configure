@@ -2,7 +2,6 @@
 # Copyright 2014-2020, Dominique LaSalle
 #
 
-
 ###############################################################################
 # CONFIG VARIABLES ############################################################
 ###############################################################################
@@ -42,14 +41,6 @@ show_help() {
   echo "    Set the C compiler to use."
   echo "  --devel"
   echo "    Turn on compiler warnings."
-  echo "  --edges64bit"
-  echo "    Use 64 bit data types for edges instead of 32 bit."
-  echo "  --vertices64bit"
-  echo "    Use 64 bit data types for vertices instead of 32 bit."
-  echo "  --weights64bit"
-  echo "    Use 64 bit data types for weights instead of 32 bit."
-  echo "  --partitions64bit"
-  echo "    Use 64 bit data types for partitions instead of 32 bit."
   echo "  --test"
   echo "    Enable unit testing."
   echo ""
@@ -112,7 +103,6 @@ for i in "${@}"; do
   esac
 done
 
-
 # check if cmake exists
 if [[ ! -x "${CMAKE}" ]]; then
   die "Could not find usable cmake: '${CMAKE}'" 
@@ -170,6 +160,5 @@ echo "distclean:"
 echo "	rm -rvf ${BUILDDIR} Makefile"
 echo ""
 ) > Makefile
-
 
 

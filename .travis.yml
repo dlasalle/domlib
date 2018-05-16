@@ -12,9 +12,9 @@ before_install:
  - if [[ $CC == "clang" && ${TRAVIS_CPU_ARCH} == "arm64" ]]; then sudo apt-get install clang-8 -y; export CC="clang-8"; fi
 
 compiler:
-  - clang
   - gcc
 
 script:
   - ./configure --devel --debug --test && make && make test 
   - ./configure --devel --test && make && make test 
+
