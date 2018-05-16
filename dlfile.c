@@ -20,7 +20,15 @@
 #include "dlfile.h"
 
 
-
+#ifndef _WIN32
+#include <unistd.h>
+#else
+#include <io.h>
+#define F_OK 0
+#define W_OK 2
+#define R_OK 4
+#define access(a,b) _access(a,b)
+#endif
 
 #ifdef __GNU_SOURCE
   #define fgets fgets_unlocked
