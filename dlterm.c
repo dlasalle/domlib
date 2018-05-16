@@ -21,6 +21,7 @@
 
 #ifndef _WIN32
 #include "sys/ioctl.h"
+#include "unistd.h"
 #else
 #include "windows.h"
 #endif
