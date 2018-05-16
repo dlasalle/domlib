@@ -18,7 +18,11 @@
 
 #include "dlutil.h"
 
-
+#ifndef _WIN32
+#include "sys/time.h"
+#else
+#include "windows.h"
+#endif
 
 
 /******************************************************************************
@@ -153,9 +157,16 @@ void dl_from_bytes(
 /* Time Wrappers */
 double dl_wctime(void)
 {
+  #ifndef _WIN32
   struct timeval ctime; 
   gettimeofday(&ctime,NULL); 
   return (double)(ctime.tv_sec + (.000001*ctime.tv_usec)); 
+  #else
+	LARGE_INTEGER fq, t;
+	QueryPerformanceFrequency(&fq);
+	QueryPerformanceCounter(&t);
+	return (double)t.QuadPart / (double)fq.QuadPart;
+  #endif
 }
 
 
