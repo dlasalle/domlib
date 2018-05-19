@@ -46,7 +46,7 @@ typedef struct cmd_opt_pair_t {
 
 
 typedef struct cmd_opt_t {
-  ssize_t id;
+  int64_t id;
   char sflag;
   const char * lflag;
   const char * desc;
@@ -57,7 +57,7 @@ typedef struct cmd_opt_t {
 
 
 typedef struct cmd_arg_t {
-  ssize_t id;
+  int64_t id;
   cmd_opt_type_t type;
   union {
     long long int i;

@@ -2,7 +2,7 @@
  * @file dlenv.h
  * @brief Function prototypes for getting and setting environment variables
  * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * Copyright (c) 2013-2018, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */
@@ -16,7 +16,7 @@
 
 
 
-#include "domlib.h"
+#include <stdint.h>
 
 
 
@@ -26,16 +26,23 @@
 ******************************************************************************/
 
 
-const char * dl_get_env_string(const char * name, const char * def);
+const char * dl_get_env_string(
+    char const * name,
+    char const * def);
 
 
-int dl_get_env_bool(const char * name, int def);
+int dl_get_env_bool(
+    char const * name, int def);
 
 
-ssize_t dl_get_env_int(const char * name, ssize_t def);
+int64_t dl_get_env_int(
+    char const * name,
+    int64_t def);
 
 
-double dl_get_env_float(const char * name, double def);
+double dl_get_env_float(
+    char const * name,
+    double def);
 
 
 

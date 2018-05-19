@@ -16,6 +16,9 @@
 #include "execinfo.h"
 #endif
 
+#include <stdio.h>
+#include <time.h>
+
 
 
 /******************************************************************************
@@ -110,7 +113,6 @@ static inline const char * __current_time(void)
 #endif
 
 #ifdef USE_ASSERTS
-  #define __my_fail() ((int*)NULL)[0] = 0
   #ifdef MPI_VERSION
   #define DL_ASSERT(cond, ...) \
     do { \
@@ -124,8 +126,7 @@ static inline const char * __current_time(void)
         fprintf(stderr, __VA_ARGS__); \
         fflush(stdout); \
         fflush(stderr); \
-        /* print the stack trace */ \
-        __my_fail(); \
+        abort(); \
       } \
     } while (0)
   #else
@@ -138,8 +139,7 @@ static inline const char * __current_time(void)
         fprintf(stderr,"\n"); \
         fflush(stdout); \
         fflush(stderr); \
-        /* print the stack trace */ \
-        __my_fail(); \
+        abort(); \
       } \
     } while (0)
   #endif

@@ -17,11 +17,13 @@
 
 
 #include "dlutil.h"
+#include "dldebug.h"
+#include <stdint.h>
 
 #ifndef _WIN32
-#include "sys/time.h"
+#include <sys/time.h>
 #else
-#include "windows.h"
+#include <windows.h>
 #endif
 
 
