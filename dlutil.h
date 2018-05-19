@@ -2,7 +2,7 @@
  * @file dlutil.h
  * @brief Utility functions (moslty timing)
  * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * Copyright (c) 2013-2018, Dominique LaSalle
  * @version 1
  * @date 2013-09-11
  */
@@ -11,9 +11,7 @@
 #ifndef DL_UTIL_H
 #define DL_UTIL_H
 
-#include "domlib.h"
-
-
+#include <stdlib.h> 
 
 
 /******************************************************************************
