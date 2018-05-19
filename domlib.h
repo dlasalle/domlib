@@ -49,7 +49,6 @@
 #include <time.h>
 #include <math.h>
 #include <assert.h>
-#include <execinfo.h>
 #include <errno.h>
 
 

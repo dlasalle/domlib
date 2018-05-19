@@ -12,6 +12,9 @@
 #ifndef DL_DEBUG_H
 #define DL_DEBUG_H
 
+#ifndef _WIN32
+#include "execinfo.h"
+#endif
 
 
 
@@ -22,6 +25,7 @@
 
 static inline void __backtrace(void)
 {
+#ifndef _WIN32
   int size, i;
   void * buffer[255];
   char ** strings; 
@@ -32,6 +36,8 @@ static inline void __backtrace(void)
     fprintf(stderr,"%d:[%p] %s\n",i,buffer[i],strings[i]);
   }
   free(strings);
+#endif
+  // TODO: come up with a windows based implementation.
 }
 
 
@@ -119,7 +125,6 @@ static inline const char * __current_time(void)
         fflush(stdout); \
         fflush(stderr); \
         /* print the stack trace */ \
-        /*__backtrace();*/ \
         __my_fail(); \
       } \
     } while (0)
@@ -134,7 +139,6 @@ static inline const char * __current_time(void)
         fflush(stdout); \
         fflush(stderr); \
         /* print the stack trace */ \
-        /*__backtrace();*/ \
         __my_fail(); \
       } \
     } while (0)
