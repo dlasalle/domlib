@@ -134,6 +134,9 @@ DLSORT_VISIBILITY ssize_t DLSORT_PUB(binarysearch)(
     __BS_BLOCK(61,i,_bs_end,v,BIN02,ptr)
     __BS_BLOCK(62,i,_bs_end,v,BIN01,ptr)
     __BS_BLOCK(63,i,_bs_end,v,BIN00,ptr)
+    default:
+      /* do nothing */
+      ;
   }
 
 
