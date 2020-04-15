@@ -202,8 +202,8 @@
 
 #define dl_near_equal(a,b) \
   ((a) == (b) ? 1 : ( \
-      (fabs(a) > fabs(b) ? (fabs(((a)-(b))/(fabs(a)+1.0)) < 0.001) : \
-        (fabs(((a)-(b))/(fabs(b)+1.0)) < 0.001))))
+      (fabs((double)a) > fabs((double)b) ? (fabs((((double)a)-((double)b))/(fabs((double)a)+1.0)) < 0.001) : \
+        (fabs((double)((a)-(b))/(fabs((double)b)+1.0)) < 0.001))))
 
 
 #ifdef _MSC_VER
