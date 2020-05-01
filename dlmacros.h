@@ -211,7 +211,9 @@
 #else
 static inline void _mm_pause(void)
 {
+#ifdef __x86_64__
   __asm__ ( "pause;" );
+#endif
 }
 #endif
 
