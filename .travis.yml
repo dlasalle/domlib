@@ -9,6 +9,7 @@ arch:
 
 before_install:
  - export LD_LIBRARY_PATH=$(if [[ $CC == "clang" ]]; then echo -n '/usr/local/clang/lib'; fi)
+ - if [[ $CC == "clang" && ${TRAVIS_CPU_ARCH} == "arm64" ]]; then sudo apt-get install libomp -y; fi
 
 compiler:
   - clang
