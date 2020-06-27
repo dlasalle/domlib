@@ -206,16 +206,4 @@
         (fabs((double)((a)-(b))/(fabs((double)b)+1.0)) < 0.001))))
 
 
-#ifdef _MSC_VER
-/* I think I need to include the xmm- something header... */
-#else
-static inline void _mm_pause(void)
-{
-#ifdef __x86_64__
-  __asm__ ( "pause;" );
-#endif
-}
-#endif
-
-   
 #endif
