@@ -9,4 +9,5 @@ compiler:
   - gcc
 
 script:
-  - make && make test
+  - ./configure --devel --debug --test && make && make test 
+  - ./configure --devel --test && make && make test 
