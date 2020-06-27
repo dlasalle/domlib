@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 2.6)
 project(DOMLIB)
 
-find_package(OpenMP REQUIRED)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+    # finding openmp fails for certain versions of clang
+    set(OpenMP_C_FLAGS "-fopenmp")
+else()
+    find_package(OpenMP REQUIRED)
+endif()
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 
 if (DEFINED DEBUG OR DEFINED ASSERT)
