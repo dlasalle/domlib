@@ -3,4 +3,7 @@
 *.log
 *.swp
 *.svn
-GKlib
+10.txt
+big.txt
+build/
+Makefile

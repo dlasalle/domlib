@@ -59,7 +59,7 @@ target_link_libraries(domlib m)
 
 if (DEFINED TESTS AND NOT TESTS EQUAL 0)
   enable_testing()
-  add_subdirectory(test)
+  add_subdirectory(tests)
 endif()
 
 
