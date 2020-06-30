@@ -2,12 +2,33 @@
 
 #define N 10L
 #define M 265010L
-#define FILENAMESMALL "data/10.txt"
-#define FILENAMEBIG "data/big.txt"
+#define FILENAMESMALL "10.txt"
+#define FILENAMEBIG "big.txt"
+
+static void makefile(
+    char const * const filename,
+    size_t const num_lines)
+{
+  size_t i;
+  file_t * file;
+  if (dl_open_file(filename, "w", &file) != DL_FILE_SUCCESS) {
+    abort();
+  }
+
+  for (i=0;i<num_lines;++i) {
+    dl_fprintf(file, "%zu\n", i);
+  }
+
+  dl_close_file(file);
+}
 
 sint_t test(void) 
 {
   file_t * file;
+
+  // create test files
+  makefile(FILENAMESMALL, N);
+  makefile(FILENAMEBIG, M);
 
   int rv = dl_open_file(FILENAMESMALL,"r",&file);
     

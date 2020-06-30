@@ -17,6 +17,7 @@
 
 
 #include "dlthread.h"
+#include "time.h"
 
 
 
@@ -99,6 +100,19 @@ typedef struct barrier_t {
 #define unset_lock(lock) omp_unset_lock(lock)
 #define free_lock(lock) omp_destroy_lock(lock)
 
+static inline void spin_wait()
+{
+  #ifdef __x86_64__
+  __asm__("pause;");
+  #else
+  // try to sleep for 100ns
+  struct timespec timin, timout;
+  timin.tv_sec = 0;
+  timin.tv_nsec = 100;
+  nanosleep(&timin, &timout);
+  #endif
+}
+
 
 static inline void init_barrier(
     barrier_t * const bar,
@@ -120,7 +134,7 @@ static inline void free_barrier(
   /* check to make sure bar is not in use */
   for (i=0;i<bar->nthreads;++i) {
     while (mybar[i*IDX_OFFSET] != 0) {
-      _mm_pause();  
+      spin_wait();
     }
   }
 
@@ -162,7 +176,7 @@ static inline void wait_barrier(
   /* wait for my children to reach the barrier */
   while ((lc && mybar[lc*IDX_OFFSET] != 1) || \
       (rc && mybar[rc*IDX_OFFSET] != 1)) {
-    _mm_pause();
+    spin_wait();
   }
 
   /* mark that I have reached the barrier */
@@ -170,7 +184,7 @@ static inline void wait_barrier(
 
   /* wait for the root thread to be finished */
   while (mybar[0] != 1) {
-    _mm_pause();
+    spin_wait();
   }
 
   /* barrier achieved -- now reset */
@@ -178,7 +192,7 @@ static inline void wait_barrier(
   /* wait for my children to reset */
   while ((lc && mybar[lc*IDX_OFFSET] == 1) || \
       (rc && mybar[rc*IDX_OFFSET] == 1)) {
-    _mm_pause();
+    spin_wait();
   }
 
   /* reset myself */
@@ -186,7 +200,7 @@ static inline void wait_barrier(
 
   /* wait for the root to reset */
   while (mybar[0] == 1) {
-    _mm_pause(); 
+    spin_wait();
   }
 
   /* so that when a barrier is free'd, we can be sure all threads are done
