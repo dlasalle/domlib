@@ -45,7 +45,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdint.h> 
+#include <stdint.h>
 #include <math.h>
 #include <assert.h>
 #include <errno.h>
@@ -191,7 +191,7 @@
 
 /* int */
 #define DLMEM_PREFIX int
-#define DLMEM_TYPE_T int 
+#define DLMEM_TYPE_T int
 #include "dlmem_headers.h"
 #undef DLMEM_PREFIX
 #undef DLMEM_TYPE_T
@@ -237,7 +237,7 @@
 
 /* double */
 #define DLMEM_PREFIX double
-#define DLMEM_TYPE_T double 
+#define DLMEM_TYPE_T double
 #include "dlmem_headers.h"
 #undef DLMEM_PREFIX
 #undef DLMEM_TYPE_T

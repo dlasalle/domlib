@@ -1,8 +1,8 @@
 /**
  * @file dlenv.c
  * @brief Functions for getting and setting environment variables
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */

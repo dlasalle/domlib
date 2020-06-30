@@ -1,8 +1,8 @@
 /**
  * @file dlenv.h
  * @brief Function prototypes for getting and setting environment variables
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2018, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */

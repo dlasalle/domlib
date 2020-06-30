@@ -13,6 +13,7 @@ before_install:
 
 compiler:
   - gcc
+  - clang
 
 script:
   - ./configure --devel --debug --test && make && make test 
