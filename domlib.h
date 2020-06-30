@@ -1,8 +1,8 @@
 /**
  * @file domlib.h
  * @brief Master header file for DOMLIB
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */
@@ -94,11 +94,12 @@
 ******************************************************************************/
 
 
-/* blue headers */
+/* pure macro headers */
 #include "dlmacros.h"
 #include "dldebug.h"
 #include "dlsort.h"
-/* white headers */
+
+/* prototype headers */
 #include "dlutil.h"
 #include "dlenv.h"
 #include "dlprint.h"
@@ -108,11 +109,6 @@
 #include "dlterm.h"
 #include "dlthread.h"
 #include "dlthread_pool.h"
-/* gklib compatability */
-#ifdef USE_GKLIB
-  #define __DL_USE_GKLIB__ 1
-  #include "dlgklib.h"
-#endif
 
 
 
@@ -120,15 +116,6 @@
 /******************************************************************************
 * CODE GENERATION *************************************************************
 ******************************************************************************/
-
-
-#ifdef __DL_USE_GKLIB__
-  GK_MKALLOC_PROTO(size,size_t)
-  GK_MKALLOC_PROTO(ssize,ssize_t)
-  GK_MKALLOC_PROTO(char,char)
-  GK_MKALLOC_PROTO(int,int)
-  GK_MKALLOC_PROTO(void,void)
-#endif
 
 
 /* size_t */

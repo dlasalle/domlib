@@ -1,8 +1,8 @@
 /**
  * @file domlib.c
  * @brief Basic memory and math operations for basic types
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */
@@ -24,15 +24,6 @@
 /******************************************************************************
 * CODE GENERATION *************************************************************
 ******************************************************************************/
-
-
-
-
-#ifdef __DL_USE_GKLIB__
-  GK_MKALLOC(size,size_t)
-  GK_MKALLOC(ssize,ssize_t)
-  GK_MKALLOC(char,char)
-#endif
 
 
 /* size_t */
