@@ -9,8 +9,7 @@ arch:
 
 before_install:
  - export LD_LIBRARY_PATH=$(if [[ $CC == "clang" ]]; then echo -n '/usr/local/clang/lib'; fi)
- - if [[ $CC == "clang" && ${TRAVIS_CPU_ARCH} == "arm64" ]]; then sudo apt-get
- install clang-8 -y; export CC="clang-8"; fi
+ - if [[ $CC == "clang" && ${TRAVIS_CPU_ARCH} == "arm64" ]]; then sudo apt-get install clang-8 -y; export CC="clang-8"; fi
 
 compiler:
   - clang
