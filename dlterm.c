@@ -96,11 +96,20 @@ size_t dl_get_term_width(void)
 
 size_t dl_get_term_height(void)
 {
+  #ifndef _WIN32
   struct winsize w;
   if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0 &&
       ((size_t)w.ws_row) <= __MAX_VALID_TERM_HEIGHT &&
       ((size_t)w.ws_row) >= __MIN_VALID_TERM_HEIGHT) {
     return (size_t)w.ws_row;
+  #else
+  int ret;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  ret = GetConsoleScreenBufferInfo(GetStdHandle( STD_OUTPUT_HANDLE ),&csbi);
+  if (ret) {
+    return (size_t)csbi.dwSize.Y;
+  #endif
+
   } else {
     return __DEFAULT_TERM_HEIGHT;
   }
