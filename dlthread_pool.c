@@ -18,12 +18,14 @@
 
 #include "dlthread_pool.h"
 #include "dlenv.h"
+#include "domlib.h"
 #ifndef _WIN32
 #include <pthread.h>
 #else
 #include "windows.h"
 #endif
 #include <omp.h>
+#include <string.h>
 
 
 

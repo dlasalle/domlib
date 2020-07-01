@@ -26,9 +26,9 @@ typedef enum dl_timer_state_t {
 
 
 typedef struct dl_timer_t {
-    double duration;
-    double start;
-    dl_timer_state_t state;
+  double duration;
+  double start;
+  dl_timer_state_t state;
 } dl_timer_t;
 
 

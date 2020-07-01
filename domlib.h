@@ -50,6 +50,19 @@
 #include <assert.h>
 #include <errno.h>
 
+// configure ssize_t
+#ifdef _WIN32
+#ifdef _WIN64
+typedef int64_t ssize_t
+#else
+typedef int32_t ssize_t
+#endif
+#else
+#include <sys/types.h>
+#endif
+
+
+
 
 
 
