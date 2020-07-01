@@ -45,15 +45,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdint.h> 
-#include <time.h>
-#include <sys/time.h>
-#include <sys/ioctl.h>
+#include <stdint.h>
 #include <math.h>
 #include <assert.h>
-#include <unistd.h>
-#include <execinfo.h>
 #include <errno.h>
+
+// configure ssize_t
+#ifdef _WIN32
+#ifdef _WIN64
+typedef int64_t ssize_t
+#else
+typedef int32_t ssize_t
+#endif
+#else
+#include <sys/types.h>
+#endif
+
+
 
 
 
@@ -196,7 +204,7 @@
 
 /* int */
 #define DLMEM_PREFIX int
-#define DLMEM_TYPE_T int 
+#define DLMEM_TYPE_T int
 #include "dlmem_headers.h"
 #undef DLMEM_PREFIX
 #undef DLMEM_TYPE_T
@@ -242,7 +250,7 @@
 
 /* double */
 #define DLMEM_PREFIX double
-#define DLMEM_TYPE_T double 
+#define DLMEM_TYPE_T double
 #include "dlmem_headers.h"
 #undef DLMEM_PREFIX
 #undef DLMEM_TYPE_T

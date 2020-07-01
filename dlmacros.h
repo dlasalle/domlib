@@ -167,9 +167,9 @@
 #define dl_max(a,b) ((a) < (b) ? (b) : (a))
 
 
-#define dl_swap(a,b) \
+#define dl_swap(a,b,_swap_var) \
   do { \
-    __typeof__(b) _swap_var = (b); \
+    _swap_var = (b); \
     (b) = (a); \
     (a) = _swap_var; \
   } while(0)

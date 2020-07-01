@@ -61,5 +61,3 @@ if (DEFINED TESTS AND NOT TESTS EQUAL 0)
   enable_testing()
   add_subdirectory(tests)
 endif()
-
-

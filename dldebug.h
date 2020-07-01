@@ -12,6 +12,12 @@
 #ifndef DL_DEBUG_H
 #define DL_DEBUG_H
 
+#ifndef _WIN32
+#include "execinfo.h"
+#endif
+
+#include <stdio.h>
+#include <time.h>
 
 
 
@@ -22,6 +28,7 @@
 
 static inline void __backtrace(void)
 {
+#ifndef _WIN32
   int size, i;
   void * buffer[255];
   char ** strings; 
@@ -32,6 +39,8 @@ static inline void __backtrace(void)
     fprintf(stderr,"%d:[%p] %s\n",i,buffer[i],strings[i]);
   }
   free(strings);
+#endif
+  // TODO: come up with a windows based implementation.
 }
 
 
@@ -104,7 +113,6 @@ static inline const char * __current_time(void)
 #endif
 
 #ifdef USE_ASSERTS
-  #define __my_fail() ((int*)NULL)[0] = 0
   #ifdef MPI_VERSION
   #define DL_ASSERT(cond, ...) \
     do { \
@@ -118,9 +126,7 @@ static inline const char * __current_time(void)
         fprintf(stderr, __VA_ARGS__); \
         fflush(stdout); \
         fflush(stderr); \
-        /* print the stack trace */ \
-        /*__backtrace();*/ \
-        __my_fail(); \
+        abort(); \
       } \
     } while (0)
   #else
@@ -133,9 +139,7 @@ static inline const char * __current_time(void)
         fprintf(stderr,"\n"); \
         fflush(stdout); \
         fflush(stderr); \
-        /* print the stack trace */ \
-        /*__backtrace();*/ \
-        __my_fail(); \
+        abort(); \
       } \
     } while (0)
   #endif

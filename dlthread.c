@@ -208,7 +208,11 @@ static inline void wait_barrier(
   mybar[myid*IDX_OFFSET] = 0;
 
   /* make sure we protect against synchronization breaking optimiztions */
+  #ifdef _WIN32
+  _ReadWriteBarrier();
+  #else
   __asm__ volatile("" : : : "memory");
+  #endif
 }
 
 

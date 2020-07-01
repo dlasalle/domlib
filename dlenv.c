@@ -1,8 +1,8 @@
 /**
  * @file dlenv.c
  * @brief Functions for getting and setting environment variables
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-10-08
  */
@@ -17,8 +17,8 @@
 
 
 #include "dlenv.h"
-
-
+#include <stdlib.h>
+#include <string.h>
 
 
 /******************************************************************************
@@ -50,15 +50,15 @@ int dl_get_env_bool(const char * name, int def)
 }
 
 
-ssize_t dl_get_env_int(const char * name, ssize_t def)
+int64_t dl_get_env_int(const char * name, int64_t def)
 {
-  ssize_t res;
+  int64_t res;
   char * endptr;
   const char * const env = getenv(name);
   if (env == NULL) {
     return def;
   } else {
-    res = (ssize_t)strtoll(env,&endptr,10);
+    res = (int64_t)strtoll(env,&endptr,10);
     /* if somebody put something stupid in there */
     if (endptr == env) {
       return def;

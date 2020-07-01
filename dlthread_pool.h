@@ -1,8 +1,8 @@
 /**
  * @file dlthread_pool.h
  * @brief A custom thread pool.
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2014-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2014-2020, Dominique LaSalle
  * @version 1
  * @date 2015-01-17
  */
@@ -14,11 +14,7 @@
 #define DLTHREAD_POOL_H
 
 
-
-
-#include "domlib.h"
-
-
+#include <stdlib.h>
 
 
 /******************************************************************************

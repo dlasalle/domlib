@@ -150,6 +150,7 @@ DLRAND_VISIBILITY DLRAND_TYPE_T * DLRAND_PUB(pseudo_shuffle_r)(
     size_t const n, 
     unsigned int * const seed)
 {
+  DLRAND_TYPE_T swap;
   size_t i,u,v;
   double r,d;
   if (n > 0) {
@@ -161,17 +162,18 @@ DLRAND_VISIBILITY DLRAND_TYPE_T * DLRAND_PUB(pseudo_shuffle_r)(
       for (i=0;i<n;++i) {
         u = size_rand_r(0,n,seed);
         v = size_rand_r(0,n,seed);
-        dl_swap(ptr[u],ptr[v]);
+        dl_swap(ptr[u],ptr[v],swap);
       }
     } else {
       r = ((n-3) / (double)nshuffles);
       for (i=0,d=0;i<nshuffles;++i,d+=r) {
         u = (size_t)d;
         v = size_rand_r(0,n-3,seed);
-        dl_swap(ptr[u],ptr[v+1]);
-        dl_swap(ptr[u+1],ptr[v+3]);
-        dl_swap(ptr[u+2],ptr[v+0]);
-        dl_swap(ptr[u+3],ptr[v+2]);
+
+        dl_swap(ptr[u],ptr[v+1],swap);
+        dl_swap(ptr[u+1],ptr[v+3],swap);
+        dl_swap(ptr[u+2],ptr[v+0],swap);
+        dl_swap(ptr[u+3],ptr[v+2],swap);
       }
     }
   }

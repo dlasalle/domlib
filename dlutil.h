@@ -1,8 +1,8 @@
 /**
  * @file dlutil.h
  * @brief Utility functions (moslty timing)
- * @author Dominique LaSalle <lasalle@cs.umn.edu>
- * Copyright (c) 2013-2015, Dominique LaSalle
+ * @author Dominique LaSalle <dominique@solidlake.com>
+ * Copyright (c) 2013-2020, Dominique LaSalle
  * @version 1
  * @date 2013-09-11
  */
@@ -11,9 +11,7 @@
 #ifndef DL_UTIL_H
 #define DL_UTIL_H
 
-#include "domlib.h"
-
-
+#include <stdlib.h> 
 
 
 /******************************************************************************
@@ -28,9 +26,9 @@ typedef enum dl_timer_state_t {
 
 
 typedef struct dl_timer_t {
-    double duration;
-    double start;
-    dl_timer_state_t state;
+  double duration;
+  double start;
+  dl_timer_state_t state;
 } dl_timer_t;
 
 
