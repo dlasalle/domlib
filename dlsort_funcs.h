@@ -166,7 +166,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(insertionsort)(
 DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(quicksort)(
     DLSORT_TYPE_T * const a, const size_t n) 
 {
-  DLSORT_TYPE_T mid;
+  DLSORT_TYPE_T mid, swap;
   size_t i,j,k;
   if (n < MIN_QUICKSORT_SIZE) {
     DLSORT_PUB(insertionsort)(a,n);
@@ -179,7 +179,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(quicksort)(
     while (i < j) {
       if (DLSORT_COMPARE(mid,a[i])) { /* a[i] is on the wrong side */
         if (!DLSORT_COMPARE(mid,a[j])) {
-          dl_swap(a[i],a[j]);
+          dl_swap(a[i],a[j],swap);
           ++i;
         }
         --j;
@@ -215,6 +215,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
   npass = sizeof(DLSORT_TYPE_T);
   DLSORT_TYPE_T * b = malloc(sizeof(DLSORT_TYPE_T)*n);
   DLSORT_TYPE_T * c = a;
+  DLSORT_TYPE_T * swap;
   #if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__ 
   #if defined(DLSORT_DLSIGN) && DLSORT_DLSIGN == DLSIGN_UNSIGNED
   /* do the counting */
@@ -232,7 +233,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
       b[bcount[j]++] = c[i];
     }
   }
-  dl_swap(c,b);
+  dl_swap(c,b,swap);
   #else
   /* do the counting */
   for (pass=npass;pass>0;) {
@@ -248,7 +249,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
       j = ((unsigned char*)(c+i))[pass];
       b[bcount[j]++] = c[i];
     }
-    dl_swap(c,b);
+    dl_swap(c,b,swap);
   }
   /* extract first iteration from the loop */
   size_set(bcount,0,DLSORT_PRI(nbuckets));
@@ -262,7 +263,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
     j = ((unsigned char*)(c+i))[0] ^ 0x80;
     b[bcount[j]++] = c[i];
   }
-  dl_swap(c,b);
+  dl_swap(c,b,swap);
   #endif
   #elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
   #if defined(DLSORT_DLSIGN) && DLSORT_DLSIGN == DLSIGN_UNSIGNED
@@ -279,7 +280,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
       j = ((unsigned char*)(c+i))[pass];
       b[bcount[j]++] = c[i];
     }
-    dl_swap(c,b);
+    dl_swap(c,b,swap);
   }
   #else
   /* do the counting */
@@ -295,7 +296,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
       j = ((unsigned char*)(c+i))[pass];
       b[bcount[j]++] = c[i];
     }
-    dl_swap(c,b);
+    dl_swap(c,b,swap);
   }
   /* extract last iteration from the loop */
   size_set(bcount,0,DLSORT_PRI(nbuckets));
@@ -309,7 +310,7 @@ DLSORT_VISIBILITY DLSORT_TYPE_T * DLSORT_PUB(radixsort)(
     j = ((unsigned char*)(c+i))[pass] ^ 0x80;
     b[bcount[j]++] = c[i];
   }
-  dl_swap(c,b);
+  dl_swap(c,b,swap);
   #endif
   #else /* they have the crazy PDP order ! */
   #endif
